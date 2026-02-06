@@ -32,13 +32,14 @@ const BentoGrid = ({ project, direction = 'next' }) => {
                     id={`hero-${project.id}`}
                     colSpan="col-span-2 lg:col-start-3 lg:col-span-4"
                     rowSpan="row-span-4 lg:row-start-1 lg:row-span-3"
-                    bgColor="bg-[#1C1C1C]"
+                    className="relative"
+                    style={{ backgroundColor: project.theme.tertiary }}
                 >
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center z-10">
                         <h2 className="text-4xl lg:text-6xl font-bold mb-4" style={{ color: project.theme.primary }}>
                             {project.title}
                         </h2>
-                        <p className="text-xl text-gray-400">{project.tagline}</p>
+                        <p className="text-xl" style={{ color: project.theme.accent }}>{project.tagline}</p>
                     </div>
                 </BentoItem>
 
@@ -47,10 +48,10 @@ const BentoGrid = ({ project, direction = 'next' }) => {
                     id={`sponge-${project.id}`}
                     colSpan="col-span-1 lg:col-start-1 lg:col-span-2"
                     rowSpan="row-span-6 row-start-5 lg:row-start-1 lg:row-span-4"
-                    bgColor="bg-[#989FAC]"
+                    style={{ backgroundColor: project.theme.primary }}
                 >
                     <div className="p-6 h-full flex items-end">
-                        <p className="text-sm lg:text-base font-medium text-black">
+                        <p className="text-sm lg:text-base font-medium" style={{ color: project.theme.secondary }}>
                             {project.description}
                         </p>
                     </div>
@@ -62,6 +63,7 @@ const BentoGrid = ({ project, direction = 'next' }) => {
                     colSpan="col-span-1 lg:col-start-5 lg:col-span-2"
                     rowSpan="row-span-4 lg:row-start-4 lg:row-span-3"
                     bgColor="bg-[#D6DCF5]"
+                    className="opacity-50"
                 />
 
                 {/* 4. Navigation Box (Case Study List) */}
@@ -69,28 +71,31 @@ const BentoGrid = ({ project, direction = 'next' }) => {
                     id="nav-box"
                     colSpan="col-span-1 row-start-9 lg:col-start-3 lg:col-span-2 lg:row-start-4 lg:row-span-3"
                     rowSpan="row-span-4"
-                    bgColor="bg-[#D6D6DA]"
+                    bgColor="bg-[#D6D6DA]" // Keep neutral for nav
                     className="p-6 font-raleway flex flex-col justify-center"
                 >
                     <ul className="text-[#1C1C1C] space-y-2">
                         {['DualEdge', 'VisualNoise', 'InvisibleValue', 'HardReset', 'NewHorizon'].map((item) => {
-                            const itemId = item.toLowerCase().replace(' ', '-'); // simple slug
-                            // Map readable names to IDs if needed, assuming match for now
+                            const itemId = item.toLowerCase().replace(' ', '-');
                             const targetId = item === 'DualEdge' ? 'dual-edge' :
                                 item === 'VisualNoise' ? 'visual-noise' :
                                     item === 'InvisibleValue' ? 'invisible-value' :
                                         item === 'HardReset' ? 'hard-reset' : 'new-horizon';
 
+                            // Highlight active project using theme primary color
+                            const isActive = project.id === targetId;
+
                             return (
                                 <li
                                     key={item}
                                     onClick={() => goToProject(targetId)}
-                                    className={`cursor-pointer transition-colors text-xl font-bold flex items-center group ${project.id === targetId ? 'text-[#D5424B]' : 'hover:text-[#D5424B]'}`}
+                                    className={`cursor-pointer transition-colors text-xl font-bold flex items-center group`}
+                                    style={{ color: isActive ? project.theme.primary : '#1C1C1C' }}
                                 >
                                     <span className="w-0 overflow-hidden group-hover:w-6 transition-all duration-300 mr-0 group-hover:mr-2">
                                         →
                                     </span>
-                                    {item}
+                                    <span className={!isActive ? "group-hover:text-gray-600" : ""}>{item}</span>
                                 </li>
                             )
                         })}
@@ -102,8 +107,7 @@ const BentoGrid = ({ project, direction = 'next' }) => {
                     id={`accent-${project.id}`}
                     colSpan="col-span-1 lg:col-start-1 lg:col-span-2"
                     rowSpan="row-span-2 row-start-11 lg:row-start-5 lg:row-span-2"
-                    bgColor="bg-[#D5424B]" // Could be project.theme.primary
-                    style={{ backgroundColor: project.theme.primary }}
+                    style={{ backgroundColor: project.theme.accent }}
                 />
 
             </div>
