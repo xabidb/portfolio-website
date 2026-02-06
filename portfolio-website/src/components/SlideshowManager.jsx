@@ -6,7 +6,14 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
 const SlideshowManager = () => {
-    const { activeProjectIndex, isTransitioning, setTransitioning } = useSlideshowStore();
+    const {
+        activeProjectIndex,
+        isTransitioning,
+        setTransitioning,
+        direction,
+        nextProject,
+        prevProject
+    } = useSlideshowStore();
 
     // Current active project
     const activeProject = projects[activeProjectIndex];
@@ -14,48 +21,90 @@ const SlideshowManager = () => {
     // Ref for the container to scope GSAP
     const containerRef = useRef(null);
 
-    // We need to track the "previous" project to handle the exit animation manually if needed,
-    // or simple rely on the fact that 'activeProject' changes.
-    // But to do "Exit then Update", we need local state or a different flow.
-    // A pattern: Use local state for "render project" and sync with store after exit animation.
-
     const [renderIndex, setRenderIndex] = React.useState(activeProjectIndex);
+
+    // Navigation Event Listeners
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (isTransitioning) return;
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                nextProject();
+            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                prevProject();
+            }
+        };
+
+        let wheelTimeout;
+        const handleWheel = (e) => {
+            if (isTransitioning) return;
+            clearTimeout(wheelTimeout);
+
+            // Simple debounce and threshold
+            if (Math.abs(e.deltaY) > 20) {
+                wheelTimeout = setTimeout(() => {
+                    if (e.deltaY > 0) {
+                        nextProject();
+                    } else {
+                        prevProject();
+                    }
+                }, 50);
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('wheel', handleWheel);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('wheel', handleWheel);
+            clearTimeout(wheelTimeout);
+        };
+    }, [isTransitioning, nextProject, prevProject]);
 
     useEffect(() => {
         // If store index changes, triggers the transition sequence
         if (activeProjectIndex !== renderIndex) {
             const ctx = gsap.context(() => {
                 // 1. EXIT ANIMATION
-                // Select all current bento boxes
+                // Determine exit Y value based on direction
+                // If going 'next', current should go UP (-100)
+                // If going 'prev', current should go DOWN (100)
+                const exitY = direction === 'next' ? -100 : 100;
+
                 gsap.to(".bento-box", {
                     duration: 0.6,
-                    y: -100, // Fly up (Antigravity)
+                    y: exitY,
                     opacity: 0,
                     scale: 0.9,
                     stagger: {
                         amount: 0.2,
-                        from: "random" // Scatter feel
+                        from: "random"
                     },
                     ease: "power2.in",
                     onComplete: () => {
                         // 2. UPDATE STATE (Mount new grid)
                         setRenderIndex(activeProjectIndex);
-                        setTransitioning(false); // Enable clicks again (optional early release)
+                        setTransitioning(false);
                     }
                 });
             }, containerRef);
 
             return () => ctx.revert();
         }
-    }, [activeProjectIndex, renderIndex, setTransitioning]);
+    }, [activeProjectIndex, renderIndex, setTransitioning, direction]);
 
-    // The 'key' ensures a full remount when renderIndex changes,
-    // triggering the BentoGrid's internal 'useGSAP' Enter animation.
-    // We double-check that the Enter animation in BentoGrid is configured to 'from' values.
+    // The 'key' ensures a full remount when renderIndex changes.
+    // We pass 'direction' to BentoGrid so it knows where to enter FROM.
+    // If we are going 'next', new grid enters from BOTTOM (100).
+    // If we are going 'prev', new grid enters from TOP (-100).
 
     return (
         <div ref={containerRef} className="relative w-full h-full overflow-hidden">
-            <BentoGrid key={projects[renderIndex].id} project={projects[renderIndex]} />
+            <BentoGrid
+                key={projects[renderIndex].id}
+                project={projects[renderIndex]}
+                direction={direction}
+            />
         </div>
     );
 };

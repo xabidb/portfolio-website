@@ -4,14 +4,18 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useSlideshowStore } from '../store/slideshowStore';
 
-const BentoGrid = ({ project }) => {
+const BentoGrid = ({ project, direction = 'next' }) => {
     const containerRef = useRef(null);
     const { goToProject } = useSlideshowStore();
 
     useGSAP(() => {
         // Entrance animation for the new grid
+        // If 'next', enters from bottom (100)
+        // If 'prev', enters from top (-100)
+        const enterY = direction === 'next' ? 100 : -100;
+
         gsap.from(".bento-box", {
-            y: 100,
+            y: enterY,
             opacity: 0,
             duration: 0.8,
             stagger: 0.05,
