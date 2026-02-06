@@ -24,42 +24,9 @@ const SlideshowManager = () => {
     const [renderIndex, setRenderIndex] = React.useState(activeProjectIndex);
 
     // Navigation Event Listeners
-    useEffect(() => {
-        const handleKeyDown = (e) => {
-            if (isTransitioning) return;
-            if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-                nextProject();
-            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-                prevProject();
-            }
-        };
+    // Navigation Event Listeners Removed per user request
+    // Navigation is now controlled solely by clicking on the Bento Grid items.
 
-        let wheelTimeout;
-        const handleWheel = (e) => {
-            if (isTransitioning) return;
-            clearTimeout(wheelTimeout);
-
-            // Simple debounce and threshold
-            if (Math.abs(e.deltaY) > 20) {
-                wheelTimeout = setTimeout(() => {
-                    if (e.deltaY > 0) {
-                        nextProject();
-                    } else {
-                        prevProject();
-                    }
-                }, 50);
-            }
-        };
-
-        window.addEventListener('keydown', handleKeyDown);
-        window.addEventListener('wheel', handleWheel);
-
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-            window.removeEventListener('wheel', handleWheel);
-            clearTimeout(wheelTimeout);
-        };
-    }, [isTransitioning, nextProject, prevProject]);
 
     useEffect(() => {
         // If store index changes, triggers the transition sequence
