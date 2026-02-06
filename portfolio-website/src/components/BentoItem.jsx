@@ -8,7 +8,9 @@ const BentoItem = ({
     colSpan = 'col-span-1',
     rowSpan = 'row-span-1',
     bgColor = 'bg-[#1C1C1C]', // Default from legacy "Video Box"
-    id
+    id,
+    style,
+    ...props
 }) => {
     const itemRef = useRef(null);
 
@@ -58,6 +60,8 @@ const BentoItem = ({
             ref={itemRef}
             id={id}
             className={`bento-box rounded-2xl relative overflow-hidden ${colSpan} ${rowSpan} ${bgColor} ${className}`}
+            style={style}
+            {...props}
         >
             {children}
         </div>

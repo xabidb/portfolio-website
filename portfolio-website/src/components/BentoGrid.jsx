@@ -59,6 +59,8 @@ const BentoGrid = ({ project, direction = 'next' }) => {
                 <BentoItem
                     id={`hero-${project.id}`}
                     className={`relative ${gridClasses.hero}`}
+                    colSpan=""
+                    rowSpan=""
                     style={{ backgroundColor: project.theme.tertiary }}
                 >
                     <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center z-10">
@@ -73,6 +75,8 @@ const BentoGrid = ({ project, direction = 'next' }) => {
                 <BentoItem
                     id={`sponge-${project.id}`}
                     className={gridClasses.sponge}
+                    colSpan=""
+                    rowSpan=""
                     style={{ backgroundColor: project.theme.primary }}
                 >
                     <div className="p-6 h-full flex items-end">
@@ -86,6 +90,8 @@ const BentoGrid = ({ project, direction = 'next' }) => {
                 <BentoItem
                     id={`blue-${project.id}`}
                     className={`opacity-50 ${gridClasses.blue}`}
+                    colSpan=""
+                    rowSpan=""
                     bgColor="bg-[#D6DCF5]"
                 />
 
@@ -93,6 +99,8 @@ const BentoGrid = ({ project, direction = 'next' }) => {
                 <BentoItem
                     id="nav-box"
                     className={`p-6 font-raleway flex flex-col justify-center ${gridClasses.nav}`}
+                    colSpan=""
+                    rowSpan=""
                     bgColor="bg-[#D6D6DA]" // Keep neutral for nav
                 >
                     <ul className="text-[#1C1C1C] space-y-2">
@@ -103,7 +111,6 @@ const BentoGrid = ({ project, direction = 'next' }) => {
                                     item === 'InvisibleValue' ? 'invisible-value' :
                                         item === 'HardReset' ? 'hard-reset' : 'new-horizon';
 
-                            // Highlight active project using theme primary color
                             const isActive = project.id === targetId;
 
                             return (
@@ -127,6 +134,8 @@ const BentoGrid = ({ project, direction = 'next' }) => {
                 <BentoItem
                     id={`accent-${project.id}`}
                     className={gridClasses.accent}
+                    colSpan=""
+                    rowSpan=""
                     style={{ backgroundColor: project.theme.accent }}
                 />
 
