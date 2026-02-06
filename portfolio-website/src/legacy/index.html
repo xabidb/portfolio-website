@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Bento Grid</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#323232] h-screen p-4 lg:p-6">
+
+    <!-- 
+      Grid Container
+      - Mobile: A 2-column, 12-row grid for finer proportion control.
+      - Large Screens (lg): A 6x6 grid.
+      - h-full makes the grid take up the full height of the padded body.
+    -->
+    <div class="grid grid-cols-2 grid-rows-12 lg:grid-cols-6 lg:grid-rows-6 gap-4 lg:gap-6 h-full">
+        
+        <!-- Video iBlack Box -->
+        <!-- Mobile: Stays at the top, spans 2/12 rows. -->
+        <div class="bg-[#1C1C1C] rounded-2xl col-span-2 row-span-4 col-start-1 row-start-1 lg:col-start-3 lg:col-span-4 lg:row-start-1 lg:row-span-3"></div>
+
+        <!-- Interchangeable Sponge Box -->
+        <!-- Mobile: Takes up the majority of the left column's height. -->
+        <div class="bg-[#989FAC] rounded-2xl col-span-1 row-span-6 col-start-1 row-start-5 lg:col-start-1 lg:col-span-2 lg:row-start-1 lg:row-span-4"></div>
+
+        <!-- MultiGrip Trowel Box -->
+        <!-- Mobile: Takes up 5/12 rows in the right column. -->
+        <div class="bg-[#D6DCF5] rounded-2xl col-span-1 row-span-4 col-start-2 row-start-5 lg:col-start-5 lg:col-span-2 lg:row-start-4 lg:row-span-3"></div>
+        
+        <!-- Case Study Box -->
+        <!-- Mobile: Same height as Light Grey box (5/12 rows). -->
+        <div class="bg-[#D6D6DA] rounded-2xl col-span-1 row-span-4 col-start-2 row-start-9 lg:col-start-3 lg:col-span-2 lg:row-start-4 lg:row-span-3 p-6 font-raleway">
+            <ul class="text-dark-text">
+                <a href="#dual-edge">
+                    <li id="dual-edge" class="case-item flex items-center mb-1 text-42xl">
+                        <span class="logo-icon w-10 h-10 mr-2 flex items-center justify-center invisible">
+                            <img src="assets/icons/DualEdge.svg" alt="DualEdge Logo" class="w-full h-full">
+                        </span>
+                        DualEdge
+                    </li>
+                </a>
+                <a href="#visual-noise">
+                    <li id="visual-noise" class="case-item flex items-center mb-1 text-42xl">
+                        <span class="logo-icon w-10 h-10 mr-2 flex items-center justify-center invisible">
+                            <img src="assets/icons/VisualNoise.svg" alt="VisualNoise Logo" class="w-full h-full">
+                        </span>
+                        VisualNoise
+                    </li>
+                </a>
+                <a href="#invisible-value">
+                    <li id="invisible-value" class="case-item flex items-center mb-1 text-42xl">
+                        <span class="logo-icon w-10 h-10 mr-2 flex items-center justify-center invisible">
+                            <img src="assets/icons/InvisibleValue.svg" alt="VisualNoise Logo" class="w-full h-full">
+                        </span>
+                        InvisibleValue
+                    </li>
+                </a>
+                <a href="#hard-reset">
+                    <li id="hard-reset" class="case-item flex items-center mb-1 text-42xl">
+                        <span class="logo-icon w-10 h-10 mr-2 flex items-center justify-center invisible">
+                            <img src="assets/icons/HardReset.svg" alt="VisualNoise Logo" class="w-full h-full">
+                        </span>
+                        HardReset
+                    </li>
+                </a>
+                <a href="#new-horizon">
+                    <li id="new-horizon" class="case-item flex items-center mb-1 text-42xl">
+                        <span class="logo-icon w-10 h-10 mr-2 flex items-center justify-center invisible">
+                            <img src="assets/icons/NewHorizon.svg" alt="VisualNoise Logo" class="w-full h-full">
+                        </span>
+                        NewHorizon
+                    </li>
+                </a>
+            </ul>
+        </div>
+        
+        <!-- Red Box -->
+        <!-- Mobile: Fills the remaining space in the left column. -->
+        <div class="bg-[#D5424B] rounded-2xl col-span-1 row-span-2 col-start-1 row-start-11 lg:col-start-1 lg:col-span-2 lg:row-start-5 lg:row-span-2"></div>
+
+    </div>
+
+</body>
+</html>

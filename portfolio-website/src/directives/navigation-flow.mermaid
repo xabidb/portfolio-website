@@ -1,0 +1,44 @@
+stateDiagram-v2
+    [*] --> BentoGrid
+    
+    state BentoGrid {
+        [*] --> Idle
+        Idle --> HoveringCard : MouseOver
+        HoveringCard --> Idle : MouseOut
+        HoveringCard --> Expanding : Click
+    }
+
+    state Expanding {
+        note right of Expanding
+            1. Capture State (Flip.getState)
+            2. Add 'is-hero' class
+            3. Animate (Flip.from)
+            4. Stagger exit others
+        end note
+        [*] --> Animating
+        Animating --> CaseStudyActive : Complete
+    }
+
+    state CaseStudyActive {
+        [*] --> HeroView
+        HeroView --> Scrolling : User Scroll
+        Scrolling --> DeepDiveContent
+        
+        state DeepDiveContent {
+           [*] --> Intro
+           Intro --> Details
+           Details --> NextProject
+        }
+    }
+
+    CaseStudyActive --> Retracting : Click 'Close' / 'Back'
+    
+    state Retracting {
+        note right of Retracting
+            1. Capture State
+            2. Remove 'is-hero'
+            3. Animate Stagger In
+        end note
+        [*] --> Reverting
+        Reverting --> BentoGrid : Complete
+    }
