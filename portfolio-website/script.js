@@ -27,11 +27,14 @@ function handleNavigation(event, targetId) {
     // --- STAGE 1: Vertical Wipe ---
 
     // Capture state
-    const state1 = Flip.getState(allBoxes);
+    const state1 = Flip.getState(allBoxes, { props: "min-height, margin, padding" });
 
     // 1. Modify Layout for Stage 1
 
     // LEFT COL: Quote expands UP
+    // We explicitly set transform origin to BOTTOM to anchor it there.
+    quoteBox.style.transformOrigin = "bottom center";
+
     // Quote becomes full left col
     quoteBox.classList.remove("lg:row-start-5", "lg:row-span-2");
     quoteBox.classList.add("lg:row-start-1", "lg:row-span-6");
@@ -39,13 +42,15 @@ function handleNavigation(event, targetId) {
 
     // Sponge shrinks to zero (visual removal without breaking Flip flow instantly)
     spongeBox.style.height = "0px";
+    spongeBox.style.minHeight = "0px";
     spongeBox.style.opacity = "0";
     spongeBox.style.margin = "0px";
     spongeBox.style.padding = "0px";
     spongeBox.style.overflow = "hidden";
 
     // RIGHT COL: Hero expands DOWN
-    // Hero becomes full right col
+    // Hero is at top, grows down. Origin top.
+    heroBox.style.transformOrigin = "top center";
     heroBox.classList.remove("lg:row-span-3");
     heroBox.classList.add("lg:row-span-6");
     heroBox.style.zIndex = "20";
@@ -53,6 +58,7 @@ function handleNavigation(event, targetId) {
     // Others shrink
     [multigripBox, navBox].forEach(box => {
         box.style.height = "0px";
+        box.style.minHeight = "0px";
         box.style.opacity = "0";
         box.style.margin = "0px";
         box.style.padding = "0px";
@@ -62,11 +68,14 @@ function handleNavigation(event, targetId) {
     // Animate to Stage 1
     Flip.from(state1, {
         duration: 0.8,
-        ease: "power2.inOut", // Smoother for layout
+        ease: "power2.inOut",
         absolute: true,
-        scale: false, // Force width/height animation to avoid distortion
+        scale: true, // Try scale true? Sometimes fixes jitter. But usually layout changes need scale: false? 
+        // Actually, for "accordion" effect, scale: true might be better if content allows.
+        // Let's stick to default (scale: false implicitly for layout changes usually, but Flip defaults to true??)
+        // Default relative: false, prune: false...
+        // Let's try explicit targets
         onComplete: () => {
-            // Pass targetId to Stage 2
             triggerStage2(targetId);
         }
     });
@@ -85,6 +94,7 @@ function triggerStage2(targetId) {
 
     // Quote gets crushed
     quoteBox.style.width = "0px";
+    quoteBox.style.minWidth = "0px"; // Ensure it crushes
     quoteBox.style.opacity = "0";
     quoteBox.style.margin = "0px";
     quoteBox.style.padding = "0px";
@@ -94,7 +104,6 @@ function triggerStage2(targetId) {
         duration: 0.8,
         ease: "power2.inOut",
         absolute: true,
-        scale: false,
         onComplete: () => {
             console.log(`Animation complete. Redirecting to ${targetId}...`);
             window.location.hash = targetId;
