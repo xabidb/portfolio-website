@@ -1,0 +1,32 @@
+/* Custom styles for your site */
+body {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* Custom font for menu items if needed */
+.font-menu-item {
+    font-family: 'Georgia', serif; /* Example, replace with actual font if available */
+}
+
+/*
+ * 1. Ocultar todos los logos por defecto
+ */
+.logo-icon {
+    visibility: hidden;
+    /* transition: visibility 0s, opacity 0.3s linear; (Opcional, para suavizar la transición) */
+}
+
+/*
+ * 2. Aplicar estilos al elemento activo
+ * (Cuando la URL es, por ejemplo, '...#dual-edge')
+ */
+
+/* Cambiar el color de texto a Rojo Activo (#da535b) */
+.case-item:target {
+    color: #da535b;
+}
+
+/* Hacer visible el logo solo en el elemento activo */
+.case-item:target .logo-icon {
+    visibility: visible;
+}
