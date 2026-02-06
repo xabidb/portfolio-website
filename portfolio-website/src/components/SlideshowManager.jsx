@@ -14,38 +14,48 @@ const SlideshowManager = () => {
     // Ref for the container to scope GSAP
     const containerRef = useRef(null);
 
-    // When activeProjectIndex changes, we could trigger a specific "Transition" component
-    // For now, we just hard-switch the data passed to BentoGrid
-    // The BentoGrid internal useGSAP handles the "Enter" animation
-    // The "Exit" animation is harder to coordinate without a TransitionGroup or similar
+    // We need to track the "previous" project to handle the exit animation manually if needed,
+    // or simple rely on the fact that 'activeProject' changes.
+    // But to do "Exit then Update", we need local state or a different flow.
+    // A pattern: Use local state for "render project" and sync with store after exit animation.
 
-    // Ideal flow:
-    // 1. Old Grid is present.
-    // 2. State changes.
-    // 3. Manager blocks render? No.
-    // 4. We probably need two layers: Current Project and Next Project?
-
-    // Simplest Antigravity MVP:
-    // Just render the active project. BentoGrid handles its own "Mount" animation.
-    // To make it smoother, we can use a key to force remount.
+    const [renderIndex, setRenderIndex] = React.useState(activeProjectIndex);
 
     useEffect(() => {
-        if (isTransitioning) {
-            // Mocking a transition delay if needed, 
-            // but for now we let the component mount animation take over.
-            // In a real FLIP scenario (Phase 5), we'd use Flip.getState here.
+        // If store index changes, triggers the transition sequence
+        if (activeProjectIndex !== renderIndex) {
+            const ctx = gsap.context(() => {
+                // 1. EXIT ANIMATION
+                // Select all current bento boxes
+                gsap.to(".bento-box", {
+                    duration: 0.6,
+                    y: -100, // Fly up (Antigravity)
+                    opacity: 0,
+                    scale: 0.9,
+                    stagger: {
+                        amount: 0.2,
+                        from: "random" // Scatter feel
+                    },
+                    ease: "power2.in",
+                    onComplete: () => {
+                        // 2. UPDATE STATE (Mount new grid)
+                        setRenderIndex(activeProjectIndex);
+                        setTransitioning(false); // Enable clicks again (optional early release)
+                    }
+                });
+            }, containerRef);
 
-            const timer = setTimeout(() => {
-                setTransitioning(false);
-            }, 1000);
-            return () => clearTimeout(timer);
+            return () => ctx.revert();
         }
-    }, [isTransitioning, setTransitioning]);
+    }, [activeProjectIndex, renderIndex, setTransitioning]);
+
+    // The 'key' ensures a full remount when renderIndex changes,
+    // triggering the BentoGrid's internal 'useGSAP' Enter animation.
+    // We double-check that the Enter animation in BentoGrid is configured to 'from' values.
 
     return (
-        <div className="relative w-full h-full overflow-hidden">
-            {/* Key is crucial to force React to unmount/remount the Grid, triggering the GSAP 'from' tween */}
-            <BentoGrid key={activeProject.id} project={activeProject} />
+        <div ref={containerRef} className="relative w-full h-full overflow-hidden">
+            <BentoGrid key={projects[renderIndex].id} project={projects[renderIndex]} />
         </div>
     );
 };
