@@ -59,7 +59,7 @@ Each project has a specific in/out animation. E.g. user is in NewHorizon screen.
     - [ ] The Outcome (Data/Results)
 - **Footer**: [Next Project? Back to Grid?]
 
-## 4. "Antigravity" Logic (Generative Rules)
+## 4. Design Logic (Generative Rules)
 *How does the site "generate" unique layouts?*
 
 - **Input Data**:

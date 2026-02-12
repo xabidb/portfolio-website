@@ -1,4 +1,4 @@
-console.log("Antigravity Script Loaded 🚀");
+console.log("Portfolio Script Loaded 🚀");
 
 gsap.registerPlugin(Flip);
 
