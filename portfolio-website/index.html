@@ -4,8 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Bento Grid</title>
+    <title>Xabi's Portfolio - Bento Grid</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -14,31 +19,23 @@
     <!-- 
       Grid Container
     -->
-    <div class="grid grid-cols-2 grid-rows-12 lg:grid-cols-6 lg:grid-rows-6 gap-4 lg:gap-6 h-full relative"
+    <div class="grid grid-cols-4 grid-rows-12 lg:grid-cols-12 lg:grid-rows-12 gap-4 lg:gap-5 h-full relative"
         id="grid-container">
 
-        <!-- DoubleEdge Video Box (Hero) -->
-        <div id="hero-box"
-            class="bg-[#1C1C1C] rounded-2xl col-span-2 row-span-4 col-start-1 row-start-1 lg:col-start-3 lg:col-span-4 lg:row-start-1 lg:row-span-3 z-10 origin-top">
-        </div>
+        <!-- Generic Bento Boxes -->
+        <div id="box-1" class="rounded-2xl transition-all duration-500 overflow-hidden"></div>
+        <div id="box-2" class="rounded-2xl transition-all duration-500 overflow-hidden"></div>
+        <div id="box-3" class="rounded-2xl transition-all duration-500 overflow-hidden"></div>
+        <div id="box-4" class="rounded-2xl transition-all duration-500 overflow-hidden"></div>
+        <div id="box-5" class="rounded-2xl transition-all duration-500 overflow-hidden"></div>
 
-        <!-- DoubleEdge Interchangeable Sponge Box -->
-        <div id="sponge-box"
-            class="bg-[#989FAC] rounded-2xl col-span-1 row-span-6 col-start-1 row-start-5 lg:col-start-1 lg:col-span-2 lg:row-start-1 lg:row-span-4 origin-top">
-        </div>
-
-        <!-- DoubleEdge MultiGrip Trowel Box -->
-        <div id="multigrip-box"
-            class="bg-[#D6DCF5] rounded-2xl col-span-1 row-span-4 col-start-2 row-start-5 lg:col-start-5 lg:col-span-2 lg:row-start-4 lg:row-span-3">
-        </div>
-
-        <!-- DoubleEdge Case Study List Box (Nav) -->
-        <div id="nav-box"
-            class="bg-[#D6D6DA] rounded-2xl col-span-1 row-span-4 col-start-2 row-start-9 lg:col-start-3 lg:col-span-2 lg:row-start-4 lg:row-span-3 p-6 font-raleway">
-            <ul class="text-dark-text">
+        <!-- Box 6 (Navigation in many layouts) -->
+        <div id="box-6" class="rounded-2xl transition-all duration-500 p-6 font-raleway overflow-hidden">
+            <ul class="text-dark-text h-full flex flex-col justify-center">
                 <a href="#dual-edge" onclick="handleNavigation(event, 'dual-edge')">
-                    <li id="dual-edge" class="case-item flex items-center mb-1 text-42xl">
-                        <span class="logo-icon w-10 h-10 mr-2 flex items-center justify-center invisible">
+                    <li id="dual-edge"
+                        class="case-item flex items-center mb-2 text-2xl lg:text-3xl font-black italic tracking-tighter uppercase transition-colors">
+                        <span class="logo-icon w-8 h-8 mr-3 flex items-center justify-center invisible">
                             <img src="assets/icons/DualEdge.svg" alt="DualEdge Logo" class="w-full h-full">
                         </span>
                         DualEdge
@@ -46,33 +43,37 @@
                 </a>
 
                 <a href="#visual-noise" onclick="handleNavigation(event, 'visual-noise')">
-                    <li id="visual-noise" class="case-item flex items-center mb-1 text-42xl">
-                        <span class="logo-icon w-10 h-10 mr-2 flex items-center justify-center invisible">
+                    <li id="visual-noise"
+                        class="case-item flex items-center mb-2 text-2xl lg:text-3xl font-black italic tracking-tighter uppercase transition-colors">
+                        <span class="logo-icon w-8 h-8 mr-3 flex items-center justify-center invisible">
                             <img src="assets/icons/VisualNoise.svg" alt="VisualNoise Logo" class="w-full h-full">
                         </span>
                         VisualNoise
                     </li>
                 </a>
                 <a href="#invisible-value" onclick="handleNavigation(event, 'invisible-value')">
-                    <li id="invisible-value" class="case-item flex items-center mb-1 text-42xl">
-                        <span class="logo-icon w-10 h-10 mr-2 flex items-center justify-center invisible">
-                            <img src="assets/icons/InvisibleValue.svg" alt="VisualNoise Logo" class="w-full h-full">
+                    <li id="invisible-value"
+                        class="case-item flex items-center mb-2 text-2xl lg:text-3xl font-black italic tracking-tighter uppercase transition-colors">
+                        <span class="logo-icon w-8 h-8 mr-3 flex items-center justify-center invisible">
+                            <img src="assets/icons/InvisibleValue.svg" alt="InvisibleValue Logo" class="w-full h-full">
                         </span>
                         InvisibleValue
                     </li>
                 </a>
                 <a href="#hard-reset" onclick="handleNavigation(event, 'hard-reset')">
-                    <li id="hard-reset" class="case-item flex items-center mb-1 text-42xl">
-                        <span class="logo-icon w-10 h-10 mr-2 flex items-center justify-center invisible">
-                            <img src="assets/icons/HardReset.svg" alt="VisualNoise Logo" class="w-full h-full">
+                    <li id="hard-reset"
+                        class="case-item flex items-center mb-2 text-2xl lg:text-3xl font-black italic tracking-tighter uppercase transition-colors">
+                        <span class="logo-icon w-8 h-8 mr-3 flex items-center justify-center invisible">
+                            <img src="assets/icons/HardReset.svg" alt="HardReset Logo" class="w-full h-full">
                         </span>
                         HardReset
                     </li>
                 </a>
                 <a href="#new-horizon" onclick="handleNavigation(event, 'new-horizon')">
-                    <li id="new-horizon" class="case-item flex items-center mb-1 text-42xl">
-                        <span class="logo-icon w-10 h-10 mr-2 flex items-center justify-center invisible">
-                            <img src="assets/icons/NewHorizon.svg" alt="VisualNoise Logo" class="w-full h-full">
+                    <li id="new-horizon"
+                        class="case-item flex items-center mb-2 text-2xl lg:text-3xl font-black italic tracking-tighter uppercase transition-colors">
+                        <span class="logo-icon w-8 h-8 mr-3 flex items-center justify-center invisible">
+                            <img src="assets/icons/NewHorizon.svg" alt="NewHorizon Logo" class="w-full h-full">
                         </span>
                         NewHorizon
                     </li>
@@ -80,10 +81,7 @@
             </ul>
         </div>
 
-        <!-- DoubleEdge Quote Box -->
-        <div id="quote-box"
-            class="bg-[#D5424B] rounded-2xl col-span-1 row-span-2 col-start-1 row-start-11 lg:col-start-1 lg:col-span-2 lg:row-start-5 lg:row-span-2 origin-bottom">
-        </div>
+    </div>
 
     </div>
 

@@ -1,7 +1,7 @@
 # Portfolio Structure Blueprint 📐
 
-## 1. The Grid (Home)
-The idea is to have as many bento grids as projects, and each whole screen bento grid belongs to one case study.
+## 1. The 5 Layouts (Home)
+The idea is to have as many bento layouts as projects, and each whole screen bento layout belongs to one case study.
 
 There are 5 projects in total:
 1. DualEdge
@@ -24,48 +24,21 @@ There are 5 projects in total:
 
 * The number of projects could be mutable and some could be replaced by others, the layouts can be different for each project, always keeping a balanced bento grid.*
 
-- **Mobile Layout**: [e.g., 6x6 grid, totally adjustable to needs]
-- **Desktop Layout**: [e.g., 6x6 grid, totally adjustable to needs]
-- **Key Elements**: [All grids are made of these elements, but the position and size of the elements can change and the content will be different for each project]
-    - [ ] Video Box (Where an animation is played)
-    - [ ] Case Study List (Keep the card dimensions the same, but change position)
-    - [ ] Product Image Box 1
-    - [ ] Product Image Box 2
-    - [ ] Case Study Quote Box
-
 ## 2. The User Flow (Navigation)
 
-- **Home Navigation**: The home page is 5 pages/sections in one. The idea is each project is a page/section, and the user can navigate between them using the Case Study List Card. Every time the user clicks on a Case Study List Link, a multiscreen slideshow animation will be triggered.
+- **Home Navigation**: The user can navigate between them using the Case Study List Card. Every time the user clicks on a Case Study List Link, a multiscreen slideshow animation will be triggered.
 
 Each project has a specific in/out animation. E.g. user is in NewHorizon screen. clicks on DualEdge link. Boxes from NewHorizon screen move out changing their size and positions till the last Box (NewHorizon) is the only one left taking all the screen space. Then the DualEdge boxes animate in moving the NewHorizon box out. And the DualEdge in animation begins untill all DualEdge boxes are in the screen.
 
-- **Home Cards Hover Animations**: To be explored.
+## 1. The Case Study Pages
 
-- **Case Study Animations**: To be explored.
-
-*Describe exactly what happens when a user interaction occurs.*
-
-- **Trigger**: Clicking on a Case Study List Link.
-- **Transition**: Multiscreen Slideshow Animation. Research if needed.
-
-## 3. Case Study Blueprint (The Deep Dive)
-*What does a single Project Page look like? Good quetion to be researched, I am open to any suggestions.*
+Each case study has a unique Style Guide defined in @docs/tokens/project_name.md and @directives/portfolio-style-guides.pen. The Style Guide is a set of CSS variables and Tailwind CSS classes that are specific to the case study.
 
 - **Header/Hero**: [e.g., Big Title + Fullscreen Video]
 - **Core Sections**:
     - [ ] Role / Timeline / Tech Stack
     - [ ] The Challenge (Text)
-    - [ ] The Gallery (Images/Grid?)
-    - [ ] The Outcome (Data/Results)
+    - [ ] The Process (Images/Grid?)
+    - [ ] The Solution (Images/Grid?)
+    - [ ] The Impact (Data/Results)
 - **Footer**: [Next Project? Back to Grid?]
-
-## 4. Design Logic (Generative Rules)
-*How does the site "generate" unique layouts?*
-
-- **Input Data**:
-    - Project Color (e.g., `#D5424B`)
-    - Project Type (e.g., "Motion Design" vs "Dev")
-- **Output Rules**:
-    - If "Motion", then [Use Video Hero?]
-    - If "Dev", then [Show Github Stats?]
-    - [Define your rules here...]

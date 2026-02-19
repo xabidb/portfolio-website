@@ -1,32 +1,52 @@
 /* Custom styles for your site */
 body {
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #fefefe;
+    overflow: hidden;
 }
 
-/* Custom font for menu items if needed */
-.font-menu-item {
-    font-family: 'Georgia', serif; /* Example, replace with actual font if available */
+.font-raleway {
+    font-family: 'Raleway', sans-serif;
 }
 
-/*
- * 1. Ocultar todos los logos por defecto
- */
+/* Custom Grid Gap */
+.gap-5 {
+    gap: 1.25rem;
+}
+
+/* Logo Icons visibility */
 .logo-icon {
-    visibility: hidden;
-    /* transition: visibility 0s, opacity 0.3s linear; (Opcional, para suavizar la transición) */
+    display: none;
 }
 
-/*
- * 2. Aplicar estilos al elemento activo
- * (Cuando la URL es, por ejemplo, '...#dual-edge')
- */
-
-/* Cambiar el color de texto a Rojo Activo (#da535b) */
-.case-item:target {
-    color: #da535b;
+.case-item.opacity-100 .logo-icon {
+    display: flex;
 }
 
-/* Hacer visible el logo solo en el elemento activo */
-.case-item:target .logo-icon {
-    visibility: visible;
+/* Base Bento Box Styles */
+.bento-box {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Navigation specific */
+.case-item {
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.case-item:hover {
+    opacity: 1 !important;
+    transform: translateX(10px);
+}
+
+/* Hide scrollbars but keep functionality */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Dynamic background transitions */
+.transition-all {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 700ms;
 }
